@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>经济智慧大脑建设可行性调研报告</title>
+<style>
+:root{--bg:#060b18;--panel:#0d1322;--card:#111827;--border:#1e293b;--primary:#3b82f6;--success:#10b981;--danger:#ef4444;--warning:#f59e0b;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;--font:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.9}
+.container{max-width:820px;margin:0 auto;padding:40px 24px}
+h1{font-size:26px;text-align:center;margin-bottom:4px}
+h2{font-size:17px;color:var(--primary);margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:14px;color:var(--text);margin:18px 0 6px}
+p{font-size:14px;color:var(--text2);margin-bottom:10px}
+.subtitle{text-align:center;color:var(--text3);font-size:13px;margin-bottom:28px}
+.box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:14px 0}
+.box.blue{border-color:var(--primary);background:rgba(59,130,246,.06)}
+.box.green{border-color:var(--success);background:rgba(16,185,129,.05)}
+.box.yellow{border-color:var(--warning);background:rgba(245,158,11,.05)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}
+th{background:var(--primary);color:#fff;padding:9px 14px;text-align:left;font-weight:600}
+td{padding:9px 14px;border:1px solid var(--border);color:var(--text2)}
+tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+.highlight{color:var(--warning);font-weight:600}
+.good{color:var(--success);font-weight:600}
+.back{display:inline-block;margin-bottom:20px;color:var(--primary);text-decoration:none;font-size:13px}
+.back:hover{text-decoration:underline}
+ul{margin:8px 0 8px 20px;color:var(--text2);font-size:14px}
+li{margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back">← 返回 Demo</a>
+
+<h1>经济智慧大脑建设可行性调研报告</h1>
+<p class="subtitle">—— 安徽省经济数据平台智能化升级的前期研究</p>
+
+<h2>一、政策背景：为什么是现在</h2>
+<p>2024 年国务院印发《关于加快公共数据资源开发利用的意见》，明确要求"推进公共数据资源的智能化分析和深度应用"。同年，国家数据局成立后首次发布《数字中国建设整体布局规划》年度工作要点，将"AI+政务"列为重点方向。</p>
+<p>安徽省层面，2025 年省政府工作报告提出"加快数字安徽建设，推动人工智能在政务服务、经济治理等领域深度应用"。目前省级经济数据平台已汇聚 2000 余项核心指标，具备升级为"智慧大脑"的数据基础。</p>
+<div class="box green">
+  <strong>结论：</strong>政策窗口期已到，数据基础已具备，升级时机成熟。
+</div>
+
+<h2>二、行业现状：别人做到了什么程度</h2>
+<table>
+<tr><th>地区/项目</th><th>核心能力</th><th>可借鉴点</th></tr>
+<tr><td>浙江省<br>"经济大脑"</td><td>归集全省 3 万余项经济指标，实现省-市-县三级联动监测，基于大模型的企业精准画像和政策匹配</td><td>多源数据融合架构、政企服务一体化</td></tr>
+<tr><td>广东省<br>"粤经济"平台</td><td>接入 32 个省级部门数据，支持经济形势实时研判和产业链精准分析，面向省领导提供"一站式"决策支持</td><td>"省领导驾驶舱"的产品形态设计</td></tr>
+<tr><td>成都市<br>"智慧蓉城"</td><td>聚焦城市级治理，融合经济、交通、环境等多域数据，基于数字孪生实现城市规划仿真</td><td>数字孪生 + 政策仿真结合的思路</td></tr>
+<tr><td>国家统计局<br>"统计云"</td><td>全国统一的数据采集、处理、分析、共享平台，2025 年完成全业务上线</td><td>数据标准化体系建设</td></tr>
+<tr><td>新加坡<br>GPA 平台</td><td>政府流程自动化平台，整合 100+ 政府机构的流程，AI 辅助审批和决策</td><td>跨部门流程编排和自动化</td></tr>
+</table>
+<div class="box yellow">
+  <strong>安徽的定位：</strong>浙江和广东起步早、投入大，目前处于领先地位。安徽不应做跟随者，而应聚焦"因果分析 + 智能推演"形成差异化——这正是多数省份尚未覆盖的深层能力。
+</div>
+
+<h2>三、技术成熟度：我们要做的事现在能做吗</h2>
+<p>本方案涉及的核心技术可以归纳为四个领域，逐一评估其成熟度：</p>
+<table>
+<tr><th>技术领域</th><th>当前成熟度</th><th>支撑依据</th></tr>
+<tr><td>大模型驱动的<br>Agent 任务编排</td><td class="good">● 成熟</td><td>Claude/GPT 等模型已原生支持工具调用和链式推理；LangGraph、AutoGen 等开源框架提供完整的 Agent 编排能力，已在金融、医疗等领域规模化应用</td></tr>
+<tr><td>经济指标间的<br>因果发现与分析</td><td class="good">● 基本成熟</td><td>因果发现算法（PC、LiNGAM、NOTEARS）经过近 20 年学术验证；微软 DoWhy + EconML 为产业级应用提供了工程化框架；causal-learn 库开箱可用</td></tr>
+<tr><td>知识图谱<br>自动构建与推理</td><td class="highlight">● 部分成熟</td><td>图数据库（Neo4j）和图计算框架成熟；从数值型数据中自动抽取因果关系仍有一定挑战，需要专家审核环节保证准确性</td></tr>
+<tr><td>经济指标<br>时序预测</td><td class="good">● 成熟</td><td>Prophet、Darts、statsmodels 等工具链完整覆盖经典统计模型和深度学习模型；政府经济预测场景对标统计局现有方法论即可</td></tr>
+</table>
+<div class="box green">
+  <strong>总体判断：</strong>核心技术栈基本成熟，不存在不可逾越的技术障碍。主要工作量在于数据整合和领域适配，而非基础研究。
+</div>
+
+<h2>四、数据基础评估</h2>
+<p>安徽目前已具备的原始数据资源：</p>
+<ul>
+  <li><strong>统计局指标库：</strong>2000+ 项月度经济指标，覆盖 GDP、工业、消费、投资、财政、外贸等核心领域，具备 5 年以上连续时间序列</li>
+  <li><strong>外部数据源：</strong>已接入企查查企业工商数据、联通运营商位置数据、网络公开经济数据</li>
+  <li><strong>可扩展数据：</strong>气象数据（省气象局）、遥感数据（自然资源厅）、政策文本（省政府公报），均可通过政务数据共享机制获取</li>
+</ul>
+<p><strong>数据短板：</strong>企业层面的微观数据（如用电量、纳税额、用工量）尚未全面接入；实时数据比例偏低，多数指标为月度滞后数据。</p>
+
+<h2>五、投入产出预估</h2>
+<table>
+<tr><th>阶段</th><th>核心产出</th><th>预估周期</th></tr>
+<tr><td>基础能力搭建</td><td>数据查询和基础因果分析工具上线，50 项核心指标的知识图谱初始版本</td><td>约 3 个月</td></tr>
+<tr><td>智能分析能力</td><td>根因分析、趋势预测、政策模拟能力上线，图谱覆盖 200+ 指标</td><td>约 4 个月（累计 7 个月）</td></tr>
+<tr><td>全面能力覆盖</td><td>29 个工具全部上线，图谱覆盖全量 2000+ 指标，四层知识库建成</td><td>约 5 个月（累计 12 个月）</td></tr>
+</table>
+<p>前期投入集中在数据治理和知识构建，后期投入递减。经济分析领域的工具和能力一次建设、长期复用，边际成本趋近于零。</p>
+
+<h2>六、风险与应对</h2>
+<table>
+<tr><th>风险</th><th>影响</th><th>应对措施</th></tr>
+<tr><td>数据质量不达标<br>（缺失、口径不一）</td><td>分析结果不可靠</td><td>建设初期投入数据治理：统一口径、补齐缺失值、建立质量监控机制</td></tr>
+<tr><td>自动发现的因果关系<br>不够准确</td><td>决策建议可信度下降</td><td>引入人工审核环节；低置信度关系不自动入库；逐步积累验证</td></tr>
+<tr><td>用户接受度低<br>不信任 AI 分析</td><td>系统建成后使用率低</td><td>每个分析结论附带可追溯的推理过程；初期作为辅助参考而非替代人工</td></tr>
+<tr><td>大模型成本过高</td><td>运营压力大</td><td>高频简单查询走轻量模型或缓存；复杂推理才调用大模型；token 预算可控</td></tr>
+</table>
+
+<h2>七、结论与建议</h2>
+<div class="box blue">
+  <p><strong>核心结论：</strong>安徽省经济数据平台具备升级为"智慧大脑"的政策条件、数据基础和技术可行性。当前正是最佳窗口期——技术已经成熟，但多数省份尚未完成同类升级，率先建成将形成显著的先发优势。</p>
+</div>
+<p><strong>建议路径：</strong></p>
+<ul>
+  <li><strong>差异化定位：</strong>不追求大而全的数据展示，聚焦"因果分析 + 智能推演"作为核心特色能力</li>
+  <li><strong>渐进式建设：</strong>先选取 30-50 个核心指标验证完整链路，跑通后扩展到全量指标</li>
+  <li><strong>人机协同：</strong>系统分析 + 人工审核，初期定位为"辅助决策工具"，逐步积累信任</li>
+  <li><strong>开放兼容：</strong>工具和知识图谱预留标准接口，后续可对接任何大模型或 Agent 框架</li>
+</ul>
+<p style="text-align:center;margin-top:28px;color:var(--text3);font-size:12px;">调研时间：2026年7月 · 信息来源：公开政策文件、学术文献、开源项目文档、行业案例</p>
+</div>
+</body>
+</html>
