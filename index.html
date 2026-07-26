@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>安徽经济分析 · Agent 能力平台</title>
+<title>安徽经济分析 · Agent 智能体</title>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -15,538 +15,312 @@
 }
 body{font-family:var(--font);background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column;overflow:hidden}
 
-/* TOP BAR */
-.topbar{height:44px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:12px;flex-shrink:0;z-index:100}
-.topbar .logo{font-weight:700;font-size:14px;display:flex;align-items:center;gap:7px}
-.topbar .logo span{font-size:11px;color:var(--text3);font-weight:400}
+.topbar{height:48px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:10px;flex-shrink:0;z-index:100}
+.topbar .logo{font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.topbar .logo span{font-size:10px;color:var(--text3);font-weight:400}
 .topbar .sep{width:1px;height:18px;background:var(--border)}
-.topbar .tab{font-size:11px;padding:5px 12px;border-radius:4px;border:1px solid transparent;background:transparent;color:var(--text2);cursor:pointer;transition:all .2s;font-family:var(--font);white-space:nowrap}
+.topbar .tab{font-size:11px;padding:5px 12px;border-radius:4px;border:1px solid transparent;background:transparent;color:var(--text2);cursor:pointer;transition:all .2s;font-family:var(--font);white-space:nowrap;text-decoration:none}
 .topbar .tab:hover{border-color:var(--primary);color:var(--primary)}
 .topbar .tab.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.topbar .badge{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(16,185,129,.15);color:var(--success);margin-left:auto}
+.topbar .key-row{display:flex;align-items:center;gap:4px;margin-left:auto}
+.topbar .key-row input{width:180px;padding:4px 8px;border-radius:4px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:10px;font-family:var(--font-mono);outline:none}
+.topbar .key-row input:focus{border-color:var(--primary)}
+.topbar .key-row button{font-size:10px;padding:4px 10px;border-radius:4px;background:var(--success);color:#fff;border:none;cursor:pointer;font-family:var(--font)}
+.topbar .key-row .key-status{font-size:10px;white-space:nowrap}
+.key-ok{color:var(--success)}.key-no{color:var(--text3)}
 
-/* MAIN */
 .main{flex:1;display:flex;overflow:hidden}
-
-/* LEFT: Tool Registry */
 .col-left{width:300px;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
-.col-left .lh{font-size:11px;font-weight:600;color:var(--text2);padding:12px 14px 8px;text-transform:uppercase;letter-spacing:.04em;display:flex;justify-content:space-between}
-.col-left .tool-list{flex:1;overflow-y:auto;padding:0 8px 8px}
-.tool-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:6px;cursor:pointer;transition:all .2s;border:1px solid transparent;margin-bottom:2px}
+.col-left .lh{font-size:10px;font-weight:600;color:var(--text2);padding:12px 14px 8px;text-transform:uppercase;letter-spacing:.04em}
+.tool-list{flex:1;overflow-y:auto;padding:0 8px 8px}
+.tool-item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:6px;cursor:pointer;transition:all .2s;border:1px solid transparent;margin-bottom:2px;font-size:11px}
 .tool-item:hover{background:rgba(59,130,246,.04);border-color:var(--border)}
-.tool-item.selected{background:rgba(59,130,246,.08);border-color:var(--primary)}
-.tool-item .ti-icon{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
-.tool-item .ti-name{font-size:12px;font-weight:600}
-.tool-item .ti-desc{font-size:10px;color:var(--text3);margin-top:1px}
-.tool-item .ti-badge{font-size:9px;padding:1px 5px;border-radius:3px;margin-top:3px;display:inline-block}
+.tool-item .ti-icon{width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.tool-item .ti-name{font-weight:600;font-size:11px}
+.tool-item .ti-desc{font-size:9px;color:var(--text3);margin-top:1px}
 
-/* CENTER: Agent Workbench */
 .col-center{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.workbench{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.wb-header{padding:12px 18px;border-bottom:1px solid var(--border);font-size:13px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.wb-header{padding:10px 16px;border-bottom:1px solid var(--border);font-size:12px;display:flex;align-items:center;gap:8px;flex-shrink:0}
 .wb-header .dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
-.wb-msgs{flex:1;overflow-y:auto;padding:16px 18px;display:flex;flex-direction:column;gap:14px;font-family:var(--font-mono);font-size:12px}
-/* Reasoning chain block */
+.wb-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
+.q-bubble{align-self:flex-end;background:var(--primary);color:#fff;padding:10px 16px;border-radius:14px 14px 3px 14px;font-size:13px;max-width:75%;animation:slideIn .2s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .rc-block{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;animation:slideIn .3s ease}
-@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.rc-head{display:flex;align-items:center;gap:8px;padding:10px 14px;font-size:12px;font-weight:600;border-bottom:1px solid var(--border)}
-.rc-body{padding:10px 14px;display:flex;flex-direction:column;gap:6px}
-.rc-step{display:flex;align-items:flex-start;gap:10px;padding:6px 10px;border-radius:4px;font-size:11px;transition:all .3s;opacity:.5}
+.rc-head{display:flex;align-items:center;gap:6px;padding:8px 14px;font-size:11px;font-weight:600;border-bottom:1px solid var(--border)}
+.rc-body{padding:8px 14px}
+.rc-step{display:flex;align-items:flex-start;gap:8px;padding:5px 8px;border-radius:4px;font-size:10px;font-family:var(--font-mono);opacity:.5;transition:all .3s}
 .rc-step.done{opacity:1}
 .rc-step.running{opacity:1;background:rgba(59,130,246,.08)}
-.rc-step .rs-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;background:rgba(255,255,255,.05)}
+.rc-step .rs-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;background:rgba(255,255,255,.05)}
 .rc-step.done .rs-icon{background:rgba(16,185,129,.15);color:var(--success)}
 .rc-step.running .rs-icon{background:rgba(59,130,246,.15);color:var(--primary);animation:pulse 1s infinite}
-.rc-step .rs-info{flex:1}
+.rc-step .rs-info{flex:1;min-width:0}
 .rc-step .rs-tool{color:var(--primary);font-weight:600}
-.rc-step .rs-detail{color:var(--text3);margin-top:2px}
-.rc-step .rs-time{font-size:10px;color:var(--text3);white-space:nowrap}
-.rc-result{margin-top:8px;padding:10px 14px;background:rgba(16,185,129,.06);border-top:1px solid rgba(16,185,129,.15);font-size:12px;line-height:1.7;animation:slideIn .4s ease}
-.rc-result strong{color:var(--success)}
-/* User question bubble */
-.q-bubble{align-self:flex-end;background:var(--primary);color:#fff;padding:10px 16px;border-radius:14px 14px 3px 14px;font-size:13px;max-width:75%;font-family:var(--font);animation:slideIn .2s ease}
-/* Welcome */
+.rc-step .rs-result{color:var(--text3);font-size:9px;margin-top:1px;word-break:break-all}
+.rc-conclusion{margin-top:6px;padding:10px 14px;background:rgba(16,185,129,.06);border-top:1px solid rgba(16,185,129,.15);font-size:12px;line-height:1.7;animation:slideIn .4s ease}
 .welcome{text-align:center;padding:40px 20px;color:var(--text3)}
 .welcome h3{font-size:16px;color:var(--text2);margin-bottom:6px}
-.welcome p{font-size:12px;margin-bottom:16px}
+.welcome p{font-size:12px;margin-bottom:14px}
 .welcome .qs{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
 .welcome .qs button{font-size:11px;padding:7px 14px;border-radius:16px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;transition:all .2s;font-family:var(--font);white-space:nowrap}
 .welcome .qs button:hover{border-color:var(--primary);color:var(--primary);background:rgba(59,130,246,.06)}
-/* Input row */
-.wb-input{display:flex;gap:10px;padding:12px 18px;border-top:1px solid var(--border);background:var(--panel);flex-shrink:0}
+.wb-input{display:flex;gap:8px;padding:10px 16px;border-top:1px solid var(--border);background:var(--panel);flex-shrink:0}
 .wb-input input{flex:1;padding:10px 16px;border-radius:20px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;outline:none;font-family:var(--font)}
 .wb-input input:focus{border-color:var(--primary)}
 .wb-input button{padding:10px 20px;border-radius:20px;background:var(--primary);color:#fff;border:none;cursor:pointer;font-weight:600;font-size:13px;font-family:var(--font);transition:all .2s}
 .wb-input button:hover{box-shadow:0 0 16px rgba(59,130,246,.3)}
-
-/* RIGHT: Panel */
-.col-right{width:320px;background:var(--panel);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0}
-.col-right .rh{font-size:11px;font-weight:600;color:var(--text2);padding:12px 14px 8px;text-transform:uppercase;letter-spacing:.04em}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin:0 10px 8px}
-.stat-card .sc-val{font-family:var(--font-mono);font-size:20px;font-weight:700}
-.stat-card .sc-label{font-size:10px;color:var(--text3)}
-.stat-card .sc-badge{font-size:10px;display:inline-block;padding:1px 6px;border-radius:3px;margin-top:2px}
+.wb-input button:disabled{opacity:.5;cursor:not-allowed}
+.col-right{width:280px;background:var(--panel);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0}
+.col-right .rh{font-size:10px;font-weight:600;color:var(--text2);padding:12px 14px 8px;text-transform:uppercase;letter-spacing:.04em}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;margin:0 10px 6px}
+.stat-card .sc-val{font-family:var(--font-mono);font-size:18px;font-weight:700}
+.stat-card .sc-label{font-size:9px;color:var(--text3)}
+.sc-badge{font-size:9px;display:inline-block;padding:1px 5px;border-radius:3px;margin-top:2px}
 .sc-badge.up{background:rgba(16,185,129,.15);color:var(--success)}
 .sc-badge.down{background:rgba(239,68,68,.15);color:var(--danger)}
-
-/* KG Mini */
-.kg-mini{position:relative;height:240px;background:var(--card);border-radius:var(--radius);margin:8px 10px;border:1px solid var(--border);overflow:hidden}
-.kg-mini svg{width:100%;height:100%}
-
-/* Overlays */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.overlay.show{display:flex;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.ov-panel{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius-lg);width:90vw;max-width:1100px;max-height:85vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.6)}
-.ov-head{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border)}
-.ov-head h2{font-size:16px}
-.ov-close{width:32px;height:32px;border-radius:50%;background:transparent;border:1px solid var(--border);color:var(--text2);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.ov-close:hover{background:var(--danger);color:#fff;border-color:var(--danger)}
-.ov-body{flex:1;overflow-y:auto;padding:20px}
-
-/* Architecture */
-.arch-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:10px;cursor:pointer;transition:all .2s}
-.arch-card:hover{border-color:var(--primary)}
-.arch-card.expanded{border-color:var(--primary)}
-.arch-card .ac-head{display:flex;align-items:center;gap:12px}
-.arch-card .ac-num{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
-.arch-card .ac-detail{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;line-height:1.8;color:var(--text2)}
-.arch-card.expanded .ac-detail{display:block}
-
-/* Scrollbar */
+.recent-call{font-size:9px;color:var(--text3);padding:3px 10px;border-bottom:1px solid var(--border);font-family:var(--font-mono)}
+.recent-call b{color:var(--primary)}
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-
-/* Tooltip */
-.kg-tip{position:absolute;display:none;background:rgba(15,23,42,.96);border:1px solid var(--primary);border-radius:6px;padding:8px 12px;pointer-events:none;z-index:50;font-size:11px}
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
 <header class="topbar">
-  <div class="logo">🧠 安徽经济分析 <span>| Agent 能力平台</span></div>
+  <div class="logo">🧠 安徽经济分析 Agent<span>| 智能体原型</span></div>
   <div class="sep"></div>
-  <button class="tab active" onclick="switchView('workbench')">💬 Agent 工作台</button>
-  <button class="tab" onclick="switchView('tools')">🔧 工具注册中心</button>
-  <button class="tab" onclick="openOverlay('kg')">🕸️ 知识图谱</button>
-  <button class="tab" onclick="openOverlay('arch')">🏗️ 平台架构</button>
-  <span class="badge">● 系统就绪 · 29个工具已注册</span>
-  <a href="proposal.html" style="font-size:11px;color:var(--text2);text-decoration:none;padding:5px 12px;border:1px solid var(--border);border-radius:4px;margin-left:8px;">📄 方案</a>
-  <a href="research.html" style="font-size:11px;color:var(--text2);text-decoration:none;padding:5px 12px;border:1px solid var(--border);border-radius:4px;margin-left:4px;">📊 调研</a>
+  <a href="proposal.html" class="tab">📄 方案</a>
+  <a href="research.html" class="tab">📊 调研</a>
+  <div class="key-row">
+    <span class="key-status key-no" id="keyStatus">⚪ 未连接</span>
+    <input id="apiKeyInput" placeholder="DeepSeek API Key" onchange="saveKey()">
+    <button onclick="saveKey()">连接</button>
+  </div>
 </header>
 
-<!-- MAIN -->
 <div class="main">
 
-  <!-- LEFT: Tool Registry View -->
-  <div class="col-left" id="view-tools" style="display:none">
-    <div class="lh">🔧 工具注册中心 <span style="font-weight:400;color:var(--text3);">29 tools</span></div>
-    <div style="padding:0 10px 8px"><input placeholder="搜索工具..." style="width:100%;padding:6px 10px;border-radius:4px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:11px;font-family:var(--font);" oninput="filterTools(this.value)"></div>
+  <div class="col-left">
+    <div class="lh">🔧 工具注册中心 · 29 tools</div>
     <div class="tool-list" id="toolList"></div>
   </div>
 
-  <!-- LEFT: Default Stats -->
-  <div class="col-left" id="view-stats">
-    <div class="lh">📊 实时指标</div>
-    <div style="padding:0 10px;overflow-y:auto;flex:1">
-      <div class="stat-card"><div class="sc-val">5.2<span style="font-size:12px;color:var(--text2);">%</span></div><div class="sc-label">GDP 增速</div><span class="sc-badge up">↑0.3%</span></div>
-      <div class="stat-card"><div class="sc-val">6.8<span style="font-size:12px;color:var(--text2);">%</span></div><div class="sc-label">工业增加值</div><span class="sc-badge up">↑0.2%</span></div>
-      <div class="stat-card" style="border-color:rgba(239,68,68,.4)"><div class="sc-val" style="color:var(--danger);">-12.0<span style="font-size:12px;">%</span></div><div class="sc-label">旅游收入 · 6月 ⚠</div><span class="sc-badge down">↓触发预警</span></div>
-      <div class="stat-card"><div class="sc-val">8.1<span style="font-size:12px;color:var(--text2);">%</span></div><div class="sc-label">社会消费品零售</div><span class="sc-badge up">↑0.5%</span></div>
-      <div class="stat-card"><div class="sc-val">5.8<span style="font-size:12px;color:var(--text2);">%</span></div><div class="sc-label">财政收入</div><span class="sc-badge up">↑0.1%</span></div>
-      <div class="stat-card" style="border-color:rgba(239,68,68,.4)"><div class="sc-val" style="color:var(--danger);">-12.0<span style="font-size:12px;">%</span></div><div class="sc-label">房地产投资 · 6月 ⚠</div><span class="sc-badge down">↓连续6月</span></div>
-    </div>
-  </div>
-
-  <!-- CENTER: Agent Workbench -->
-  <div class="col-center" id="view-workbench">
-    <div class="workbench">
-      <div class="wb-header"><span class="dot"></span> Agent 推理控制台 · 实时追踪工具调用链</div>
+  <div class="col-center">
+    <div class="workbench" style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+      <div class="wb-header"><span class="dot"></span> Agent 推理控制台 · DeepSeek 驱动 · 实时推理</div>
       <div class="wb-msgs" id="wbMsgs">
         <div class="welcome">
-          <h3>🧠 Agent 能力平台</h3>
-          <p>不是固定流程的分析助手。Agent 根据您的问题<b>动态选择工具</b>、<b>编排推理路径</b>。<br>每次提问，您都能看到 Agent 的完整思考过程。</p>
+          <h3>🧠 经济分析 Agent 智能体</h3>
+          <p>接入了 DeepSeek 大模型。Agent <b>自主理解问题 → 动态选择工具 → 执行分析 → 输出结论</b>。<br>每次提问都是一次真实的 AI 推理，不是预设动画。</p>
           <div class="qs">
-            <button onclick="ask('为什么6月安徽旅游收入下降12%？')">🔍 根因分析：旅游为什么下降？</button>
-            <button onclick="ask('如果新能源汽车购置补贴增加10%，对安徽工业和经济有什么影响？')">🎯 政策推演：新能源补贴影响</button>
-            <button onclick="ask('当前安徽经济最大的三个风险点是什么？')">🛡️ 风险评估：当前风险点</button>
-            <button onclick="ask('房地产投资持续下滑，对安徽经济的传导链是怎样的？')">🔗 传导链：房地产→上下游</button>
-            <button onclick="ask('帮我生成一份7月经济形势分析简报')">📝 报告生成：7月经济简报</button>
+            <button onclick="ask('为什么6月安徽旅游收入下降12%？请做根因分析')">🔍 旅游收入根因分析</button>
+            <button onclick="ask('如果新能源汽车补贴增加10%，对安徽工业有什么影响？')">🎯 新能源补贴政策推演</button>
+            <button onclick="ask('当前安徽经济最大的风险点是什么？请做评估')">🛡️ 经济风险评估</button>
+            <button onclick="ask('房地产投资持续下滑，对安徽经济的传导链分析')">🔗 房地产传导链分析</button>
+            <button onclick="ask('帮我总结安徽当前经济形势，生成一份简报')">📝 经济形势简报</button>
           </div>
         </div>
       </div>
       <div class="wb-input">
-        <input id="wbInput" placeholder="输入经济分析问题，观察 Agent 如何动态选择工具..." onkeydown="if(event.key==='Enter')ask()">
-        <button onclick="ask()">发送 →</button>
+        <input id="wbInput" placeholder="输入经济分析问题，Agent 会自主决策调用哪些工具..." onkeydown="if(event.key==='Enter')ask()">
+        <button id="btnSend" onclick="ask()">发送 →</button>
       </div>
     </div>
   </div>
 
-  <!-- RIGHT: Knowledge Graph Mini + Info -->
-  <div class="col-right" id="view-right">
-    <div class="rh">🕸️ 知识图谱 · 实时关联</div>
-    <div class="kg-mini" id="kgMini"></div>
-    <div class="rh">📋 最近工具调用</div>
-    <div style="padding:0 10px;font-size:11px;color:var(--text3);" id="recentCalls">
-      <p style="padding:8px 0;">等待 Agent 调用工具...</p>
-    </div>
-  </div>
-
-</div>
-
-<!-- OVERLAY: Knowledge Graph Full -->
-<div class="overlay" id="overlay-kg">
-  <div class="ov-panel" style="max-width:960px">
-    <div class="ov-head"><h2>🕸️ 经济知识图谱 · 指标关系网络</h2><button class="ov-close" onclick="closeOverlay('kg')">✕</button></div>
-    <div class="ov-body" style="padding:0;height:520px;position:relative" id="kgFull"></div>
-    <div style="position:absolute;bottom:12px;left:32px;display:flex;gap:16px;font-size:11px;color:var(--text2);z-index:10">
-      <span>━ <span style="color:#3b82f6;">正向影响</span></span><span>━ <span style="color:#ef4444;">负向影响</span></span><span>┅ <span style="color:#f59e0b;">领先/滞后</span></span><span style="margin-left:8px;">💡 拖拽节点 · 点击高亮关联</span>
-    </div>
-  </div>
-</div>
-
-<!-- OVERLAY: Architecture -->
-<div class="overlay" id="overlay-arch">
-  <div class="ov-panel" style="max-width:750px">
-    <div class="ov-head"><h2>🏗️ Agent 能力平台 · 五层架构</h2><button class="ov-close" onclick="closeOverlay('arch')">✕</button></div>
-    <div class="ov-body">
-      <div style="text-align:center;margin-bottom:16px;font-size:13px;color:var(--text2);">核心思路：Agent 不是执行预设脚本，而是<b>理解意图 → 动态选择能力 → 编排工具链 → 输出可解释结果</b></div>
-      <div class="arch-card" onclick="this.classList.toggle('expanded')">
-        <div class="ac-head"><div class="ac-num" style="background:rgba(16,185,129,.15);color:#10b981;">①</div><div><strong>Data Fabric · 数据底座</strong><p style="font-size:11px;color:var(--text3);">多源数据汇聚治理</p></div></div>
-        <div class="ac-detail">统计局2000+指标 · 企业数据(企查查) · 联通运营商数据 · 网络公开数据 · 气象遥感 · 政策文本。TimescaleDB时序存储 + OpenMetadata元数据管理。</div>
-      </div>
-      <div class="arch-card" onclick="this.classList.toggle('expanded')">
-        <div class="ac-head"><div class="ac-num" style="background:rgba(59,130,246,.15);color:#3b82f6;">②</div><div><strong>Economic Knowledge Graph · 经济知识图谱</strong><p style="font-size:11px;color:var(--text3);">从Excel到关系网</p></div></div>
-        <div class="ac-detail">自动发现2000+指标间因果/关联/滞后关系。Neo4j图数据库 + causal-learn因果发现(PC/GES/NOTEARS) + 四层知识库(概念→事实→机制→决策)。</div>
-      </div>
-      <div class="arch-card" onclick="this.classList.toggle('expanded')">
-        <div class="ac-head"><div class="ac-num" style="background:rgba(139,92,246,.15);color:#8b5cf6;">③</div><div><strong>Capability Tool Layer · 能力工具层</strong><p style="font-size:11px;color:var(--text3);">29个标准化工具，Agent按需调用</p></div></div>
-        <div class="ac-detail">6大工具类：数据查询(5) · 因果分析(6) · 预测(5) · 模拟推演(4) · 知识检索(5) · 呈现(4)。每个工具有标准Function Calling Schema，Agent通过Tool Registry发现和调用。</div>
-      </div>
-      <div class="arch-card" onclick="this.classList.toggle('expanded')">
-        <div class="ac-head"><div class="ac-num" style="background:rgba(245,158,11,.15);color:#f59e0b;">④</div><div><strong>Agent Reasoning Layer · Agent 推理层</strong><p style="font-size:11px;color:var(--text3);">意图识别→任务规划→工具调用→结果综合</p></div></div>
-        <div class="ac-detail">LangGraph图式编排引擎。Agent不是固定流程：根据问题动态生成执行计划(DAG)，支持条件分支、并行调用、中间结果驱动的重规划。每个推理步骤可追溯、可解释。</div>
-      </div>
-      <div class="arch-card" onclick="this.classList.toggle('expanded')">
-        <div class="ac-head"><div class="ac-num" style="background:rgba(239,68,68,.15);color:#ef4444;">⑤</div><div><strong>Decision Cockpit · 决策驾驶舱</strong><p style="font-size:11px;color:var(--text3);">从查数据到做决策</p></div></div>
-        <div class="ac-detail">一个界面完成L1描述→L2诊断→L3预测→L4建议→L5推演的全流程。核心差异：不是把答案喂给用户，而是让用户看见Agent的完整推理链。</div>
-      </div>
-    </div>
+  <div class="col-right">
+    <div class="rh">📊 安徽实时指标</div>
+    <div class="stat-card"><div class="sc-val">5.2<span style="font-size:11px;color:var(--text2);">%</span></div><div class="sc-label">GDP 增速</div><span class="sc-badge up">↑0.3%</span></div>
+    <div class="stat-card"><div class="sc-val">6.8<span style="font-size:11px;color:var(--text2);">%</span></div><div class="sc-label">工业增加值</div><span class="sc-badge up">↑0.2%</span></div>
+    <div class="stat-card" style="border-color:rgba(239,68,68,.4)"><div class="sc-val" style="color:var(--danger);">-12.0<span style="font-size:11px;">%</span></div><div class="sc-label">旅游收入 · 6月 ⚠</div><span class="sc-badge down">↓预警</span></div>
+    <div class="stat-card"><div class="sc-val">8.1<span style="font-size:11px;color:var(--text2);">%</span></div><div class="sc-label">社会消费品零售</div><span class="sc-badge up">↑0.5%</span></div>
+    <div class="stat-card"><div class="sc-val">5.8<span style="font-size:11px;color:var(--text2);">%</span></div><div class="sc-label">财政收入</div><span class="sc-badge up">↑0.1%</span></div>
+    <div class="stat-card" style="border-color:rgba(239,68,68,.4)"><div class="sc-val" style="color:var(--danger);">-12.0<span style="font-size:11px;">%</span></div><div class="sc-label">房地产投资 · 6月 ⚠</div><span class="sc-badge down">↓连续6月</span></div>
+    <div class="rh">📋 本次工具调用</div>
+    <div id="recentCalls"><p style="font-size:9px;color:var(--text3);padding:8px 10px;">等待 Agent 调用工具...</p></div>
   </div>
 </div>
 
 <script>
-/* ============ TOOLS DATA ============ */
-const TOOLS=[
-  {cat:'数据查询',icon:'📊',color:'#3b82f6',items:[
-    {name:'indicator_query',desc:'单/多指标时序查询',badge:'查询'},
-    {name:'cross_section_query',desc:'多地区截面数据对比',badge:'查询'},
-    {name:'anomaly_scan',desc:'批量异常检测(IQR/ZScore)',badge:'检测'},
-    {name:'correlation_matrix',desc:'指标间相关性矩阵',badge:'分析'},
-    {name:'drill_down',desc:'省市县逐级下钻',badge:'查询'}
-  ]},
-  {cat:'因果分析',icon:'🔍',color:'#8b5cf6',items:[
-    {name:'granger_causality_test',desc:'Granger因果检验(领先/滞后)',badge:'因果'},
-    {name:'causal_discovery',desc:'PC/GES/NOTEARS自动发现因果结构',badge:'因果'},
-    {name:'root_cause_attribution',desc:'异常归因+Shapley值量化贡献',badge:'核心'},
-    {name:'counterfactual_analysis',desc:'反事实推断(DoWhy)',badge:'因果'},
-    {name:'mediation_analysis',desc:'中介效应分析',badge:'因果'},
-    {name:'structural_break_test',desc:'经济结构断点检测',badge:'因果'}
-  ]},
-  {cat:'预测',icon:'📈',color:'#10b981',items:[
-    {name:'univariate_forecast',desc:'单指标ARIMA/Prophet/ETS预测',badge:'预测'},
-    {name:'multivariate_forecast',desc:'多变量VAR/LSTM联合预测',badge:'预测'},
-    {name:'conditional_forecast',desc:'给定政策条件下的预测',badge:'预测'},
-    {name:'scenario_comparison',desc:'多情景并行预测对比',badge:'预测'},
-    {name:'forecast_decomposition',desc:'趋势/季节/事件分解',badge:'预测'}
-  ]},
-  {cat:'模拟推演',icon:'🎯',color:'#f59e0b',items:[
-    {name:'policy_shock_sim',desc:'政策变量冲击模拟(VAR脉冲)',badge:'模拟'},
-    {name:'transmission_chain',desc:'冲击沿产业链传导模拟',badge:'模拟'},
-    {name:'sensitivity_analysis',desc:'关键参数敏感性分析',badge:'模拟'},
-    {name:'what_if_dialogue',desc:'交互式What-If推演',badge:'模拟'}
-  ]},
-  {cat:'知识检索',icon:'📚',color:'#06b6d4',items:[
-    {name:'concept_lookup',desc:'经济学术语/概念检索',badge:'知识'},
-    {name:'policy_search',desc:'历史政策检索+效果评估',badge:'知识'},
-    {name:'case_match',desc:'历史经济事件相似案例匹配',badge:'知识'},
-    {name:'regulation_check',desc:'政策合规性检查',badge:'知识'},
-    {name:'economic_logic_validate',desc:'推理链经济学逻辑校验',badge:'知识'}
-  ]},
-  {cat:'呈现',icon:'📝',color:'#ef4444',items:[
-    {name:'auto_visualize',desc:'自动选图(折线/柱状/热力)',badge:'呈现'},
-    {name:'report_generate',desc:'结构化报告生成',badge:'呈现'},
-    {name:'nl_explain',desc:'量化结论→自然语言解释',badge:'呈现'},
-    {name:'dashboard_build',desc:'按需构建临时仪表盘',badge:'呈现'}
-  ]}
-];
-
-/* ============ RENDER TOOL LIST ============ */
-function renderToolList(filter=''){
-  const container=document.getElementById('toolList');
-  if(!container)return;
-  let html='';
-  TOOLS.forEach(cat=>{
-    const filtered=filter?cat.items.filter(t=>t.name.includes(filter)||t.desc.includes(filter)):cat.items;
-    if(filtered.length===0&&filter)return;
-    html+='<div class="lh" style="font-size:10px;color:var(--text3);">'+cat.icon+' '+cat.cat+'</div>';
-    filtered.forEach(t=>{
-      html+='<div class="tool-item" onclick="selectTool(\''+t.name+'\')" id="tool-'+t.name+'">';
-      html+='<div class="ti-icon" style="background:rgba('+(cat.color==='#3b82f6'?'59,130,246':cat.color==='#8b5cf6'?'139,92,246':cat.color==='#10b981'?'16,185,129':cat.color==='#f59e0b'?'245,158,11':cat.color==='#06b6d4'?'6,182,212':'239,68,68')+',.12);color:'+cat.color+';">'+cat.icon+'</div>';
-      html+='<div><div class="ti-name">'+t.name+'</div><div class="ti-desc">'+t.desc+'</div><span class="ti-badge" style="background:rgba('+(cat.color==='#3b82f6'?'59,130,246':cat.color==='#8b5cf6'?'139,92,246':cat.color==='#10b981'?'16,185,129':cat.color==='#f59e0b'?'245,158,11':cat.color==='#06b6d4'?'6,182,212':'239,68,68')+',.15);color:'+cat.color+';">'+t.badge+'</span></div>';
-      html+='</div>';
-    });
-  });
-  container.innerHTML=html;
+/* ============ API KEY ============ */
+const LS_KEY='ds_api_key';
+function saveKey(){
+  const v=document.getElementById('apiKeyInput').value.trim();
+  if(v){localStorage.setItem(LS_KEY,v);document.getElementById('keyStatus').textContent='🟢 已连接';document.getElementById('keyStatus').className='key-status key-ok'}
 }
-function filterTools(v){renderToolList(v.toLowerCase())}
-function selectTool(name){
-  document.querySelectorAll('.tool-item').forEach(t=>t.classList.remove('selected'));
-  const el=document.getElementById('tool-'+name);if(el)el.classList.add('selected');
-}
-
-/* ============ VIEW SWITCHING ============ */
-function switchView(v){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelector('[onclick*="'+v+'"]').classList.add('active');
-  document.getElementById('view-stats').style.display=v==='workbench'?'flex':'none';
-  document.getElementById('view-tools').style.display=v==='tools'?'flex':'none';
-}
-document.addEventListener('DOMContentLoaded',()=>renderToolList());
-
-/* ============ AGENT SIMULATION ============ */
-const SCENARIOS={
-  '旅游':{
-    intent:'root_cause_analysis',
-    intentLabel:'根因分析 (Root Cause Analysis)',
-    plan:[
-      {tool:'anomaly_scan',params:'(target: tourism_revenue, method: IQR, threshold: 2σ)',result:'✅ 确认异常：旅游收入 6月↓12%，超过预警阈值8%'},
-      {tool:'indicator_query',params:'(indicator: tourism_revenue, range: 2025-06~2026-06)',result:'✅ 时序数据提取完成，12个月趋势显示6月为明显断点'},
-      {tool:'correlation_matrix',params:'(target: tourism_revenue, n: 30, method: Spearman)',result:'✅ 筛选出15个高相关指标：酒店入住率(r=0.82)、降雨量(r=-0.71)、高铁客流(r=0.68)...'},
-      {tool:'granger_causality_test',params:'(target: tourism_revenue, candidates: [rainfall, rail_traffic, hotel_price, ...], max_lag: 3)',result:'✅ 4个指标Granger-cause旅游收入(p<0.05)：降雨量、高铁客流、酒店价格、周边省份游客量'},
-      {tool:'root_cause_attribution',params:'(target: tourism_revenue, factors: [rainfall, rail_traffic, hotel_price, competition], method: shapley)',result:'✅ 归因完成：暴雨35% + 高铁客流↓25% + 酒店涨价15% + 周边竞争10% + 其他15%'},
-      {tool:'case_match',params:'(indicator: tourism_revenue, anomaly_direction: down, similar_events: [flood_2024, flood_2020])',result:'✅ 匹配到2个历史相似事件：2024年皖南洪水(恢复期2月)、2020年洪水(恢复期3月)'},
-      {tool:'nl_explain',params:'(findings: [...], style: decision_maker)',result:'✅ 自然语言解释生成完成'}
-    ],
-    conclusion:'<b>旅游收入下降12%</b>的主要根因是<b>连续暴雨天气</b>（贡献35%），叠加高铁客流下降（25%）和酒店价格上涨（15%）。天气因素属于短期扰动，历史类似事件（2024/2020洪水）的恢复周期为2-3个月。建议加大暑期后半程营销推广力度，预计可挽回3%-5%。'
-  },
-  '新能源':{
-    intent:'policy_simulation',
-    intentLabel:'政策模拟 (Policy Simulation)',
-    plan:[
-      {tool:'indicator_query',params:'(indicator: nev_sales, industry_output, employment, fiscal_revenue, range: 2024-01~2026-06)',result:'✅ 基准数据提取完成：新能源车销量年均增长35%，产业链产值占工业18%'},
-      {tool:'granger_causality_test',params:'(target: industry_output, candidate: nev_subsidy, max_lag: 6)',result:'✅ 补贴变化Granger-cause工业增加值(p<0.01)，滞后2-4个月'},
-      {tool:'conditional_forecast',params:'(scenario: subsidy+10%, forecast_horizon: 12m, model: EconML CATE)',result:'✅ 条件预测完成：补贴+10% → 销量↑15-20%，工业增加值↑0.3%'},
-      {tool:'transmission_chain',params:'(shock: nev_subsidy+10%, graph: industry_chain, depth: 3)',result:'✅ 传导链推演：销量↑→锂电池↑→正极材料↑→锂矿↑→就业↑→消费↑'},
-      {tool:'policy_shock_sim',params:'(variable: nev_subsidy, shock: +10%, variables: [industry, employment, fiscal, gdp])',result:'✅ 脉冲响应：工业↑0.3% → GDP↑0.15% → 就业↑2000人 → 财政↑1.2亿'},
-      {tool:'nl_explain',params:'(findings: [...], style: policy_brief)',result:'✅ 政策简报生成完成'}
-    ],
-    conclusion:'补贴增加10%将产生显著的链式效应：<b>新能源汽车销量↑15-20%</b> → 锂电池产值↑8% → 工业增加值额外增长0.3% → 新增约2000个岗位 → 净财政收入增加约1.2亿元。需注意补贴退坡后的销量波动风险。'
-  },
-  '风险':{
-    intent:'risk_assessment',
-    intentLabel:'风险评估 (Risk Assessment)',
-    plan:[
-      {tool:'anomaly_scan',params:'(indicators: all, method: IQR, threshold: 2σ)',result:'✅ 全量扫描完成：2000+指标中检测到3个异常信号'},
-      {tool:'correlation_matrix',params:'(targets: [real_estate, tourism, land_revenue], n: 50)',result:'✅ 风险指标关联网络构建完成'},
-      {tool:'transmission_chain',params:'(source: real_estate_investment, direction: downstream, depth: 4)',result:'✅ 房地产传导链：钢铁↓→水泥↓→家电↓→就业↓→消费↓→财政↓'},
-      {tool:'case_match',params:'(scenario: real_estate_downturn, period: 2014-2015)',result:'✅ 历史参考：2014-15年房地产下行周期持续约18个月，GDP拖累约1.2pp'},
-      {tool:'nl_explain',params:'(findings: [...], style: risk_report)',result:'✅ 风险评估报告生成完成'}
-    ],
-    conclusion:'当前三大风险：<br>🔴 <b>高风险：房地产投资↓12%</b>，连续6月下滑，传导至钢铁(马钢)/水泥(海螺)/家电产业，拖累GDP约0.8-1.2pp<br>🟡 <b>中风险：旅游收入短期异常</b>，暴雨导致，恢复周期2-3月<br>🟡 <b>中风险：土地出让↓18%</b>，影响地方可用财力<br>✅ <b>积极因素：</b>消费↑8.1%、工业↑6.8%、新能源产业链强劲'
-  },
-  '房地产':{
-    intent:'transmission_analysis',
-    intentLabel:'传导链分析 (Transmission Chain)',
-    plan:[
-      {tool:'indicator_query',params:'(indicators: [real_estate, steel, cement, home_appliance, construction_employment, land_revenue], range: 2024-01~2026-06)',result:'✅ 6个传导链指标数据提取完成'},
-      {tool:'granger_causality_test',params:'(pairs: [(real_estate, steel), (real_estate, cement), (steel, industrial_output)], max_lag: 6)',result:'✅ 房地产Granger-cause钢铁(p<0.001, lag=3月)、水泥(p<0.01, lag=2月)'},
-      {tool:'transmission_chain',params:'(source: real_estate-12%, graph: industry_chain, depth: 4, model: input_output)',result:'✅ 四层传导链构建完成，基于安徽省42部门投入产出表'},
-      {tool:'counterfactual_analysis',params:'(scenario: real_estate stabilized, target: industrial_output, method: DoWhy)',result:'✅ 反事实推断：如果房地产投资持平，工业增加值将额外增长0.5pp'},
-      {tool:'nl_explain',params:'(findings: [...], style: decision_maker)',result:'✅ 传导链分析报告生成完成'}
-    ],
-    conclusion:'<b>房地产↓12%传导链：</b><br>L1直接：钢铁需求↓(马钢) + 水泥需求↓(海螺) + 工程机械↓<br>L2产业：建材家居↓ + 家电↓(安徽家电大省)<br>L3就业：建筑用工↓ → 农民工收入↓ → 县域消费↓<br>L4财政：土地出让↓18% → 地方可用财力受限<br>💡 建议：加快保障房+城中村改造对冲，参考2015-16年棚改经验。'
-  },
-  '简报':{
-    intent:'report_generation',
-    intentLabel:'报告生成 (Report Generation)',
-    plan:[
-      {tool:'indicator_query',params:'(indicators: [gdp, industry, consumption, tourism, fiscal, real_estate], range: 2026-06, aggregate: summary)',result:'✅ 6月核心指标提取完成'},
-      {tool:'anomaly_scan',params:'(indicators: top_50, method: IQR)',result:'✅ 50个核心指标扫描完成，发现2个异常'},
-      {tool:'scenario_comparison',params:'(scenarios: [baseline, optimistic, pessimistic], horizon: 3m)',result:'✅ 三种情景预测完成'},
-      {tool:'report_generate',params:'(template: monthly_economic_brief, sections: [overview, sector_analysis, anomaly, forecast, risks, recommendations])',result:'✅ 结构化报告生成完成，共6章'}
-    ],
-    conclusion:'<b>安徽省2026年7月经济形势简报</b><br>━━━━━━━━<br><b>总体：</b>稳中有进，GDP↑5.2%<br><b>亮点：</b>工业↑6.8%(新能源车拉动)、消费↑8.1%(暑期旺季)<br><b>风险：</b>旅游↓12%(暴雨)、房地产↓12%(持续)<br><b>预测：</b>7月GDP 5.0-5.5%，旅游8月回升<br><b>建议：</b>暑期营销+新能源消费刺激+保障房对冲<br>━━━━━━━━<br>📥 完整报告已生成，Word/PDF可导出。'
-  }
-};
-
-function ask(preset){
-  const input=document.getElementById('wbInput');
-  const q=preset||input.value.trim();
-  if(!q){return}
-  if(!preset)input.value='';
-
-  const msgs=document.getElementById('wbMsgs');
-  // Remove welcome if present
-  const welcome=msgs.querySelector('.welcome');if(welcome)welcome.remove();
-
-  // Show user question
-  msgs.insertAdjacentHTML('beforeend','<div class="q-bubble">'+q+'</div>');
-  msgs.scrollTop=msgs.scrollHeight;
-
-  // Determine scenario
-  let scenario=null;
-  for(const[k,v]of Object.entries(SCENARIOS)){if(q.includes(k)){scenario=v;break;}}
-
-  if(!scenario){
-    msgs.insertAdjacentHTML('beforeend','<div class="rc-block"><div class="rc-body"><p style="font-size:12px;color:var(--text2);">请从建议问题中选择，或输入关于旅游、新能源、风险、房地产、简报的问题。</p></div></div>');
-    msgs.scrollTop=msgs.scrollHeight;
-    return;
-  }
-
-  // Build reasoning chain block
-  const blockId='block-'+Date.now();
-  let html='<div class="rc-block" id="'+blockId+'">';
-  html+='<div class="rc-head">🧠 意图识别：<span style="color:var(--primary);">'+scenario.intentLabel+'</span><span style="font-size:10px;color:var(--text3);margin-left:auto;">置信度 0.94</span></div>';
-  html+='<div class="rc-body" id="'+blockId+'-body">';
-  scenario.plan.forEach((s,i)=>{
-    html+='<div class="rc-step" id="'+blockId+'-step'+i+'"><div class="rs-icon">⏳</div><div class="rs-info"><span class="rs-tool">'+s.tool+'</span> <span style="color:var(--text3);font-size:10px;">'+s.params+'</span><div class="rs-detail" id="'+blockId+'-res'+i+'"></div></div><span class="rs-time" id="'+blockId+'-time'+i+'"></span></div>';
-  });
-  html+='</div></div>';
-  msgs.insertAdjacentHTML('beforeend',html);
-  msgs.scrollTop=msgs.scrollHeight;
-
-  // Animate tool execution sequentially
-  let delay=400;
-  scenario.plan.forEach((s,i)=>{
-    setTimeout(()=>{
-      const step=document.getElementById(blockId+'-step'+i);
-      const res=document.getElementById(blockId+'-res'+i);
-      const time=document.getElementById(blockId+'-time'+i);
-      if(step)step.classList.add('running');
-      if(time)time.textContent=(Math.random()*0.8+0.2).toFixed(2)+'s';
-    },delay);
-    setTimeout(()=>{
-      const step=document.getElementById(blockId+'-step'+i);
-      const res=document.getElementById(blockId+'-res'+i);
-      if(step){step.classList.remove('running');step.classList.add('done');}
-      if(res)res.textContent=s.result;
-      // Update recent calls
-      if(i===scenario.plan.length-1)updateRecentCalls(scenario.plan);
-    },delay+300);
-    delay+=450;
-  });
-
-  // Show conclusion after all tools done
-  setTimeout(()=>{
-    const block=document.getElementById(blockId);
-    if(block){
-      block.insertAdjacentHTML('beforeend','<div class="rc-result">'+scenario.conclusion+'</div>');
-    }
-    msgs.scrollTop=msgs.scrollHeight;
-  },delay+200);
-}
-
-function updateRecentCalls(plan){
-  const container=document.getElementById('recentCalls');
-  let html='';
-  plan.forEach(p=>{html+='<div style="padding:4px 0;border-bottom:1px solid var(--border);"><span style="color:var(--primary);">'+p.tool+'</span><br><span style="font-size:10px;">'+p.params.substring(0,60)+'...</span></div>';});
-  container.innerHTML=html;
-}
-
-/* ============ KNOWLEDGE GRAPH ============ */
+function getKey(){return localStorage.getItem(LS_KEY)||''}
 (function(){
-  function buildKG(containerId){
-    const container=document.getElementById(containerId);if(!container)return;
-    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
-    svg.setAttribute('viewBox','0 0 900 500');svg.style.width='100%';svg.style.height='100%';
-    container.appendChild(svg);
-    const ns='http://www.w3.org/2000/svg';
-
-    const nodes=[
-      {id:'gdp',x:450,y:30,label:'GDP',r:22,color:'#3b82f6'},
-      {id:'consumption',x:280,y:120,label:'消费',r:17,color:'#10b981'},
-      {id:'industry',x:620,y:100,label:'工业',r:17,color:'#10b981'},
-      {id:'investment',x:560,y:210,label:'投资',r:15,color:'#10b981'},
-      {id:'tourism',x:150,y:200,label:'旅游',r:17,color:'#ef4444'},
-      {id:'realestate',x:700,y:220,label:'房地产',r:17,color:'#ef4444'},
-      {id:'hotel',x:60,y:320,label:'酒店',r:14,color:'#f59e0b'},
-      {id:'traffic',x:200,y:320,label:'交通',r:14,color:'#f59e0b'},
-      {id:'retail',x:350,y:340,label:'零售',r:14,color:'#f59e0b'},
-      {id:'steel',x:580,y:350,label:'钢铁',r:14,color:'#f59e0b'},
-      {id:'power',x:740,y:340,label:'用电',r:13,color:'#f59e0b'},
-      {id:'fiscal',x:420,y:430,label:'财政收入',r:17,color:'#8b5cf6'},
-      {id:'employment',x:290,y:450,label:'就业',r:15,color:'#8b5cf6'},
-      {id:'auto',x:700,y:430,label:'新能源车',r:16,color:'#3b82f6'},
-      {id:'land',x:560,y:450,label:'土地出让',r:15,color:'#ef4444'},
-    ];
-    const edges=[
-      {from:'gdp',to:'consumption',color:'#3b82f6'},{from:'gdp',to:'industry',color:'#3b82f6'},
-      {from:'consumption',to:'tourism',color:'#3b82f6'},{from:'consumption',to:'retail',color:'#3b82f6'},
-      {from:'industry',to:'investment',color:'#3b82f6'},{from:'industry',to:'auto',color:'#3b82f6'},
-      {from:'tourism',to:'hotel',color:'#3b82f6'},{from:'tourism',to:'traffic',color:'#3b82f6'},
-      {from:'realestate',to:'steel',color:'#f59e0b',dash:'6,3'},{from:'realestate',to:'power',color:'#f59e0b',dash:'6,3'},
-      {from:'realestate',to:'land',color:'#ef4444'},{from:'realestate',to:'investment',color:'#ef4444',dash:'4,2'},
-      {from:'hotel',to:'retail',color:'#3b82f6'},{from:'traffic',to:'retail',color:'#3b82f6'},
-      {from:'retail',to:'fiscal',color:'#3b82f6'},{from:'steel',to:'fiscal',color:'#3b82f6'},
-      {from:'power',to:'fiscal',color:'#3b82f6'},{from:'auto',to:'employment',color:'#3b82f6'},
-      {from:'auto',to:'fiscal',color:'#3b82f6'},{from:'land',to:'fiscal',color:'#ef4444',dash:'4,2'},
-      {from:'fiscal',to:'employment',color:'#3b82f6'},{from:'industry',to:'employment',color:'#3b82f6'},
-    ];
-
-    // Defs
-    const defs=document.createElementNS(ns,'defs');
-    ['#3b82f6','#ef4444','#f59e0b'].forEach(c=>{
-      const m=document.createElementNS(ns,'marker');m.setAttribute('id','ar-'+c.replace('#','')+'-'+containerId);
-      m.setAttribute('viewBox','0 0 10 10');m.setAttribute('refX','9');m.setAttribute('refY','5');
-      m.setAttribute('markerWidth','5');m.setAttribute('markerHeight','5');m.setAttribute('orient','auto');
-      const p=document.createElementNS(ns,'path');p.setAttribute('d','M0,0 L10,5 L0,10 Z');p.setAttribute('fill',c);
-      m.appendChild(p);defs.appendChild(m);
-    });
-    svg.appendChild(defs);
-
-    // Edges
-    const edgeEls=[];
-    edges.forEach(e=>{
-      const fn=nodes.find(n=>n.id===e.from),tn=nodes.find(n=>n.id===e.to);
-      if(!fn||!tn)return;
-      const l=document.createElementNS(ns,'line');
-      l.setAttribute('x1',fn.x);l.setAttribute('y1',fn.y);l.setAttribute('x2',tn.x);l.setAttribute('y2',tn.y);
-      l.setAttribute('stroke',e.color);l.setAttribute('stroke-width','1.5');l.setAttribute('opacity','.5');
-      if(e.dash)l.setAttribute('stroke-dasharray',e.dash);
-      l.setAttribute('marker-end','url(#ar-'+e.color.replace('#','')+'-'+containerId+')');
-      l.classList.add('kg-e');svg.appendChild(l);edgeEls.push({el:l,from:e.from,to:e.to});
-    });
-
-    // Nodes
-    const nodeEls=[];
-    nodes.forEach(n=>{
-      const g=document.createElementNS(ns,'g');g.setAttribute('transform','translate('+n.x+','+n.y+')');g.dataset.id=n.id;
-      if(n.color==='#ef4444'){const gl=document.createElementNS(ns,'circle');gl.setAttribute('r',n.r+8);gl.setAttribute('fill','none');gl.setAttribute('stroke',n.color);gl.setAttribute('opacity','.3');gl.setAttribute('stroke-width','1.5');gl.setAttribute('stroke-dasharray','3,3');g.appendChild(gl);}
-      const c=document.createElementNS(ns,'circle');c.setAttribute('r',n.r);c.setAttribute('fill',n.color);c.setAttribute('opacity','.85');g.appendChild(c);
-      const t=document.createElementNS(ns,'text');t.setAttribute('text-anchor','middle');t.setAttribute('dy','5');t.setAttribute('fill','#fff');t.setAttribute('font-size','10');t.setAttribute('font-weight','600');t.textContent=n.label;g.appendChild(t);
-      g.style.cursor='pointer';
-      g.addEventListener('click',()=>{
-        const connected=new Set([n.id]);edges.forEach(e=>{if(e.from===n.id)connected.add(e.to);if(e.to===n.id)connected.add(e.from);});
-        nodeEls.forEach(ng=>ng.setAttribute('opacity',connected.has(ng.dataset.id)?'1':'.15'));
-        edgeEls.forEach(ed=>ed.el.setAttribute('opacity',(ed.from===n.id||ed.to===n.id)?'.8':'.08'));
-      });
-      svg.appendChild(g);nodeEls.push(g);
-    });
-    svg.addEventListener('click',e=>{if(e.target===svg){nodeEls.forEach(ng=>ng.setAttribute('opacity','1'));edgeEls.forEach(ed=>ed.el.setAttribute('opacity','.5'));}});
-  }
-  buildKG('kgMini');
-  buildKG('kgFull');
+  const k=getKey();
+  if(k){document.getElementById('apiKeyInput').value=k;document.getElementById('keyStatus').textContent='🟢 已连接';document.getElementById('keyStatus').className='key-status key-ok'}
 })();
 
-/* ============ OVERLAY ============ */
-function openOverlay(id){document.getElementById('overlay-'+id).classList.add('show')}
-function closeOverlay(id){document.getElementById('overlay-'+id).classList.remove('show')}
-document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('show')}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.overlay.show').forEach(o=>o.classList.remove('show'))});
+/* ============ RENDER TOOL LIST ============ */
+const TOOLS=[
+  {cat:'数据查询',icon:'📊',color:'#3b82f6',items:[
+    {name:'indicator_query',desc:'单/多指标时序查询'},{name:'cross_section_query',desc:'多地区截面数据对比'},{name:'anomaly_scan',desc:'批量异常检测'},{name:'correlation_matrix',desc:'指标间相关性矩阵'},{name:'drill_down',desc:'省市县逐级下钻'}
+  ]},
+  {cat:'因果分析',icon:'🔍',color:'#8b5cf6',items:[
+    {name:'granger_causality_test',desc:'Granger因果检验'},{name:'causal_discovery',desc:'自动发现因果结构'},{name:'root_cause_attribution',desc:'异常归因+量化贡献'},{name:'counterfactual_analysis',desc:'反事实推断'},{name:'mediation_analysis',desc:'中介效应分析'},{name:'structural_break_test',desc:'结构断点检测'}
+  ]},
+  {cat:'预测',icon:'📈',color:'#10b981',items:[
+    {name:'univariate_forecast',desc:'单指标时序预测'},{name:'multivariate_forecast',desc:'多变量联合预测'},{name:'conditional_forecast',desc:'条件预测'},{name:'scenario_comparison',desc:'多情景对比'},{name:'forecast_decomposition',desc:'趋势/季节/事件分解'}
+  ]},
+  {cat:'模拟推演',icon:'🎯',color:'#f59e0b',items:[
+    {name:'policy_shock_sim',desc:'政策变量冲击模拟'},{name:'transmission_chain',desc:'产业链传导模拟'},{name:'sensitivity_analysis',desc:'参数敏感性分析'},{name:'what_if_dialogue',desc:'交互式What-If推演'}
+  ]},
+  {cat:'知识检索',icon:'📚',color:'#06b6d4',items:[
+    {name:'concept_lookup',desc:'经济术语/概念检索'},{name:'policy_search',desc:'历史政策检索'},{name:'case_match',desc:'历史案例匹配'},{name:'regulation_check',desc:'政策合规性检查'},{name:'economic_logic_validate',desc:'推理链逻辑校验'}
+  ]},
+  {cat:'呈现',icon:'📝',color:'#ef4444',items:[
+    {name:'auto_visualize',desc:'自动选图'},{name:'report_generate',desc:'结构化报告生成'},{name:'nl_explain',desc:'结论→自然语言'},{name:'dashboard_build',desc:'按需构建仪表盘'}
+  ]}
+];
+(function(){
+  let h='';
+  TOOLS.forEach(cat=>{
+    h+='<div class="lh">'+cat.icon+' '+cat.cat+'</div>';
+    cat.items.forEach(t=>{
+      h+='<div class="tool-item"><div class="ti-icon" style="background:rgba('+(cat.color==='#3b82f6'?'59,130,246':cat.color==='#8b5cf6'?'139,92,246':cat.color==='#10b981'?'16,185,129':cat.color==='#f59e0b'?'245,158,11':cat.color==='#06b6d4'?'6,182,212':'239,68,68')+',.12);color:'+cat.color+';">'+cat.icon+'</div><div><div class="ti-name">'+t.name+'</div><div class="ti-desc">'+t.desc+'</div></div></div>';
+    });
+  });
+  document.getElementById('toolList').innerHTML=h;
+})();
+
+/* ============ TOOL EXECUTORS (simulated data) ============ */
+function execTool(name, args){
+  const d={
+    indicator_query:'指标查询结果：GDP增速5.2%(↑0.3%)，工业增加值6.8%(↑0.2%)，消费增速8.1%(↑0.5%)，旅游收入增速-12.0%(↓4.0%)，财政收入5.8%(↑0.1%)，房地产投资-12.0%(↓持续6月)。',
+    anomaly_scan:'异常检测结果：检测到2个异常指标——①旅游收入6月↓12%，超过预警阈值(±8%)；②房地产投资连续6个月负增长，6月↓12%。',
+    correlation_matrix:'相关性分析结果：与旅游收入最相关的15个指标——酒店入住率(r=0.82)、降雨量(r=-0.71)、高铁客流量(r=0.68)、酒店均价(r=-0.55)、周边省份游客量(r=-0.48)...',
+    granger_causality_test:'Granger因果检验结果：4个指标显著Granger-cause旅游收入(p<0.05)——降雨量(lag=1)、高铁客流量(lag=1)、酒店均价(lag=2)、周边省份游客量(lag=1)。',
+    root_cause_attribution:'根因归因结果(Shapley值分解)：暴雨天气贡献35%、高铁客流量下降贡献25%、酒店价格上涨贡献15%、周边省份竞争贡献10%、其他因素贡献15%。',
+    case_match:'案例匹配结果：匹配到2个相似历史事件——①2024年6-7月皖南洪水，旅游收入↓15%，恢复周期约2个月；②2020年7月洪水，旅游收入↓18%，恢复周期约3个月。',
+    policy_shock_sim:'政策模拟结果：新能源汽车补贴+10%→销量↑15-20%→锂电池产值↑8%→工业增加值额外增长0.3%→新增就业约2000个→净财政收入增加约1.2亿元。需关注补贴退坡后的销量波动风险。',
+    transmission_chain:'传导链分析结果：房地产↓12%→L1:钢铁需求↓3.2%(领先3月)、水泥需求↓2.8%；L2:建材家居↓、家电↓(安徽家电大省)；L3:建筑用工↓→农民工收入↓→县域消费↓；L4:土地出让↓18%→地方可用财力受限。',
+    conditional_forecast:'条件预测结果：基于EconML CATE模型，补贴+10%条件下，12个月销量增长15-20%，工业增加值额外增长约0.3个百分点。',
+    univariate_forecast:'单指标预测结果(Prophet模型)：7月GDP增速预计5.0-5.5%，消费增速8.3%，旅游收入增速-6%(7月)→+2%(8月)，工业增加值增速6.8%。',
+    scenario_comparison:'多情景对比结果：乐观情景GDP 5.5%，基准5.2%，悲观4.9%。旅游收入乐观-3%、基准-6%、悲观-9%，8月有望转正。',
+    concept_lookup:'概念查询结果："旅游总收入"指一定时期内旅游目的地通过销售旅游产品和服务获得的全部货币收入，含国内旅游收入和国际旅游外汇收入。统计口径由省文旅厅月度统计报表提供。',
+  };
+  if(d[name])return d[name];
+  if(d[name+'_'+JSON.stringify(args)])return d[name+'_'+JSON.stringify(args)];
+  return name+'('+(args?JSON.stringify(args):'')+') 执行完成，返回结构化分析数据。';
+}
+
+/* ============ DEEPSEEK API CALL ============ */
+async function callDeepSeek(messages, tools){
+  const key=getKey();
+  if(!key)throw new Error('API Key 未设置');
+  const resp=await fetch('https://api.deepseek.com/v1/chat/completions',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+    body:JSON.stringify({model:'deepseek-chat',messages,tools:tools||undefined,temperature:0.3,max_tokens:2000})
+  });
+  if(!resp.ok){const e=await resp.text();throw new Error('API 错误: '+resp.status+' '+e)}
+  const data=await resp.json();
+  return data.choices[0].message;
+}
+
+/* ============ TOOL DEFINITIONS (Function Calling Schema) ============ */
+const TOOL_DEFS=[
+  {type:'function',function:{name:'indicator_query',description:'查询经济指标在指定时间范围、地区的数值和趋势',parameters:{type:'object',properties:{indicator:{type:'string',description:'指标名称，如GDP/tourism/industry'},period:{type:'string',description:'时间范围，如2026-06'},region:{type:'string',description:'地区，默认安徽全省'}},required:['indicator']}}},
+  {type:'function',function:{name:'anomaly_scan',description:'扫描所有指标，标出偏离正常范围的异常值',parameters:{type:'object',properties:{threshold:{type:'string',description:'预警阈值，默认±8%'}},required:[]}}},
+  {type:'function',function:{name:'correlation_matrix',description:'计算与目标指标最相关的其他指标',parameters:{type:'object',properties:{target:{type:'string',description:'目标指标名称'},top_n:{type:'integer',description:'返回前N个最相关指标'}},required:['target']}}},
+  {type:'function',function:{name:'granger_causality_test',description:'检验哪些指标Granger-cause(领先于)目标指标',parameters:{type:'object',properties:{target:{type:'string',description:'目标指标'},candidates:{type:'string',description:'候选因子列表，逗号分隔'}},required:['target']}}},
+  {type:'function',function:{name:'root_cause_attribution',description:'对异常指标量化各影响因子的贡献比例',parameters:{type:'object',properties:{target:{type:'string',description:'目标异常指标'},method:{type:'string',description:'归因方法，默认shapley'}},required:['target']}}},
+  {type:'function',function:{name:'case_match',description:'匹配历史上类似的经济事件案例',parameters:{type:'object',properties:{scenario:{type:'string',description:'当前场景描述'}},required:['scenario']}}},
+  {type:'function',function:{name:'policy_shock_sim',description:'模拟政策变量变化的经济影响',parameters:{type:'object',properties:{policy:{type:'string',description:'政策类型描述'},magnitude:{type:'string',description:'变化幅度'}},required:['policy']}}},
+  {type:'function',function:{name:'transmission_chain',description:'模拟冲击沿产业链的传导',parameters:{type:'object',properties:{source:{type:'string',description:'冲击来源指标'},depth:{type:'integer',description:'传导深度'}},required:['source']}}},
+  {type:'function',function:{name:'conditional_forecast',description:'给定条件下的预测',parameters:{type:'object',properties:{scenario:{type:'string',description:'条件情景描述'},horizon:{type:'string',description:'预测时长'}},required:['scenario']}}},
+  {type:'function',function:{name:'univariate_forecast',description:'单指标未来趋势预测',parameters:{type:'object',properties:{indicator:{type:'string',description:'指标名称'},horizon:{type:'string',description:'预测时长'}},required:['indicator']}}},
+  {type:'function',function:{name:'scenario_comparison',description:'多情景对比预测',parameters:{type:'object',properties:{indicator:{type:'string',description:'指标名称'},scenarios:{type:'string',description:'情景列表'}},required:['indicator']}}},
+  {type:'function',function:{name:'concept_lookup',description:'查询经济学术语或统计口径定义',parameters:{type:'object',properties:{term:{type:'string',description:'查询术语'}},required:['term']}}},
+];
+
+/* ============ AGENT LOOP ============ */
+async function ask(preset){
+  const input=document.getElementById('wbInput');
+  const q=preset||input.value.trim();
+  if(!q)return;
+  if(!preset)input.value='';
+  const key=getKey();
+  if(!key){alert('请先在右上角输入 DeepSeek API Key 并点击"连接"');return}
+
+  const msgs=document.getElementById('wbMsgs');
+  const welcome=msgs.querySelector('.welcome');if(welcome)welcome.remove();
+  msgs.insertAdjacentHTML('beforeend','<div class="q-bubble">'+q+'</div>');
+  msgs.scrollTop=msgs.scrollHeight;
+  document.getElementById('btnSend').disabled=true;
+
+  const blockId='block-'+Date.now();
+  msgs.insertAdjacentHTML('beforeend','<div class="rc-block" id="'+blockId+'"><div class="rc-head">🧠 Agent 推理中...</div><div class="rc-body" id="'+blockId+'-body"></div></div>');
+  msgs.scrollTop=msgs.scrollHeight;
+
+  const sysPrompt=`你是安徽省经济分析Agent智能体。你有权调用以下工具来分析经济问题：
+- indicator_query: 查询经济指标数值
+- anomaly_scan: 扫描异常指标
+- correlation_matrix: 找相关指标
+- granger_causality_test: 因果检验
+- root_cause_attribution: 根因归因(量化各因素贡献%)
+- case_match: 匹配历史案例
+- policy_shock_sim: 政策冲击模拟
+- transmission_chain: 产业链传导分析
+- conditional_forecast: 条件预测
+- univariate_forecast: 趋势预测
+- scenario_comparison: 多情景对比
+- concept_lookup: 概念查询
+
+工作流程：理解用户问题→判断需要哪些工具→按逻辑顺序调用→综合所有工具结果→给出自然语言结论。工具调用3-7个即可，不要过分调用。每个结论要引用具体工具返回的数据。`;
+
+  const messages=[{role:'system',content:sysPrompt},{role:'user',content:q}];
+  let finalAnswer='';
+  const calledTools=[];
+  const body=document.getElementById(blockId+'-body');
+
+  try{
+    for(let round=0;round<6;round++){
+      const msg=await callDeepSeek(messages,TOOL_DEFS);
+      if(msg.tool_calls&&msg.tool_calls.length>0){
+        for(const tc of msg.tool_calls){
+          const fn=tc.function;let args={};try{args=JSON.parse(fn.arguments)}catch(e){}
+          const stepId=blockId+'-step'+calledTools.length;
+          body.insertAdjacentHTML('beforeend','<div class="rc-step running" id="'+stepId+'"><div class="rs-icon">⏳</div><div class="rs-info"><span class="rs-tool">'+fn.name+'</span><div class="rs-result">调用中...</div></div></div>');
+          msgs.scrollTop=msgs.scrollHeight;
+          const result=execTool(fn.name,args);
+          await new Promise(r=>setTimeout(r,400+Math.random()*300));
+          const step=document.getElementById(stepId);
+          if(step){step.classList.remove('running');step.classList.add('done');step.querySelector('.rs-icon').textContent='✓';step.querySelector('.rs-result').textContent=result.substring(0,180);}
+          calledTools.push({name:fn.name,args,result});
+          messages.push({role:'assistant',content:null,tool_calls:[tc]});
+          messages.push({role:'tool',tool_call_id:tc.id,content:result});
+          msgs.scrollTop=msgs.scrollHeight;
+        }
+      }else{
+        finalAnswer=msg.content||'';
+        break;
+      }
+    }
+    if(!finalAnswer)finalAnswer='分析完成，请查看上方工具调用结果。';
+  }catch(e){
+    finalAnswer='⚠️ 推理出错：'+e.message+'\n\n请检查 API Key 是否正确，或稍后重试。';
+  }
+
+  // Update recent calls
+  let rcHtml='';
+  calledTools.forEach(t=>{rcHtml+='<div class="recent-call"><b>'+t.name+'</b><br>'+t.result.substring(0,60)+'...</div>';});
+  document.getElementById('recentCalls').innerHTML=rcHtml||'<p style="font-size:9px;color:var(--text3);padding:8px 10px;">无工具调用</p>';
+
+  // Show conclusion
+  const block=document.getElementById(blockId);
+  if(block){
+    block.querySelector('.rc-head').innerHTML='🧠 Agent 推理完成 · 调用了 <b style="color:var(--primary);">'+calledTools.length+'</b> 个工具';
+    block.insertAdjacentHTML('beforeend','<div class="rc-conclusion">'+finalAnswer.replace(/\n/g,'<br>')+'</div>');
+  }
+  msgs.scrollTop=msgs.scrollHeight;
+  document.getElementById('btnSend').disabled=false;
+}
 </script>
 </body>
 </html>
