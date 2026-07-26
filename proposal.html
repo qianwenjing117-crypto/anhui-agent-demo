@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>安徽经济Agent能力建设方案</title>
+<style>
+:root{
+  --bg:#060b18;--panel:#0d1322;--card:#111827;--border:#1e293b;
+  --primary:#3b82f6;--success:#10b981;--danger:#ef4444;--warning:#f59e0b;
+  --text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;
+  --font:"PingFang SC","Microsoft YaHei",-apple-system,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.8}
+.container{max-width:800px;margin:0 auto;padding:40px 24px}
+h1{font-size:24px;text-align:center;margin-bottom:4px}
+h2{font-size:16px;color:var(--primary);margin:28px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+h3{font-size:13px;color:var(--text2);margin:16px 0 8px}
+p{font-size:14px;color:var(--text2);margin-bottom:10px}
+.box{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:12px 0;text-align:center}
+.box.blue{border-color:var(--primary);background:rgba(59,130,246,.08)}
+.box.green{border-color:var(--success);background:rgba(16,185,129,.06)}
+.box.red{border-color:var(--danger);background:rgba(239,68,68,.06)}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th{background:var(--primary);color:#fff;padding:8px 12px;text-align:center;font-weight:600}
+td{padding:8px 12px;border:1px solid var(--border);text-align:center;color:var(--text2)}
+.flow{display:flex;gap:0;margin:12px 0;border-radius:8px;overflow:hidden}
+.flow div{flex:1;text-align:center;padding:10px 6px;font-size:11px;font-weight:700;color:#fff}
+.back{display:inline-block;margin-bottom:20px;color:var(--primary);text-decoration:none;font-size:13px}
+.back:hover{text-decoration:underline}
+.subtitle{text-align:center;color:var(--text3);font-size:13px;margin-bottom:24px}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back">← 返回 Demo</a>
+
+<h1>安徽省经济智慧大脑 · 智能分析能力升级方案</h1>
+<p class="subtitle">—— 让系统从"能查数据"升级为"能分析、会建议、可推演" ——</p>
+
+<h2>一、为什么要升级</h2>
+<p>我省已建成经济数据平台，汇集旅游、工业、消费等 2000 多项经济指标，接入了企业、运营商、网络公开等多类外部数据，日常承担指标监测和数据查询两项职能。</p>
+<p>但目前系统存在一个根本性不足：只能回答<strong>"发生了什么"</strong>，无法回答<strong>"为什么发生""接下来会怎样""应该怎么办"</strong>。</p>
+
+<div class="box blue">
+  <strong>现在：</strong>"6月旅游收入下降12%。"<br>
+  <strong style="color:var(--primary);">→ 目标：</strong>"主要原因是连续暴雨（约占35%）、高铁客流下降（约25%），预计8月回暖，建议加大暑期营销，可挽回3-5个百分点。"
+</div>
+
+<p>四个具体短板：异常只告警不分析、指标互不关联、不能预测和推演、报告全靠人工撰写（一份报告3-5个工作日）。</p>
+
+<h2>二、我们要做什么</h2>
+<p>核心目标：将系统从<strong>"经济数据查询工具"升级为"经济分析决策助手"</strong>。</p>
+
+<div class="box blue">
+  第一层 描述（已实现）→ 第二层 诊断：为什么发生？→ 第三层 预测：接下来会怎样？→ 第四层 建议与推演：应该怎么办？→ 第五层 自主决策（远期愿景）
+</div>
+
+<p>实现思路：通过人工智能技术，让系统学会像经济分析团队一样工作——自动发现指标之间的关联规律、自动追溯异常背后的原因、自动评估政策措施的可能效果。</p>
+
+<h2>三、具体建设内容</h2>
+
+<h3>3.1 经济分析工具包（29项能力，六大类）</h3>
+<p>系统接到分析任务时，自动从工具包中选择合适的工具组合来完成——就像分析师决定用什么方法、看什么数据。</p>
+
+<table>
+<tr><th>能力类别</th><th>数量</th><th>能做什么</th><th>举例</th></tr>
+<tr><td>数据查询</td><td>5</td><td>查指标、扫异常、对比地区、逐级下钻</td><td>各市消费排名？本月哪些异常？</td></tr>
+<tr><td>原因分析</td><td>6</td><td>发现因果、量化贡献、识别转折点</td><td>旅游下降各因素占比？</td></tr>
+<tr><td>趋势预测</td><td>5</td><td>预测走势、条件预测、多情景对比</td><td>下半年GDP区间？发消费券效果？</td></tr>
+<tr><td>政策推演</td><td>4</td><td>模拟政策影响、产业链传导</td><td>补贴加码对就业财政的影响？</td></tr>
+<tr><td>知识检索</td><td>5</td><td>概念查询、案例匹配、政策检索</td><td>2020洪水后恢复用了多久？</td></tr>
+<tr><td>结果呈现</td><td>4</td><td>智能绘图、报告生成、语言解释</td><td>把分析整理成一份报告。</td></tr>
+</table>
+
+<h3>3.2 经济知识图谱</h3>
+<p>将2000多项指标从互不关联的"大表"变成"关系网"。系统通过分析多年历史数据，自动识别指标之间的三类关系：谁影响谁、谁领先谁（领先多久）、影响强度有多大。</p>
+<p>同时结合统计局的产业投入产出数据，描绘安徽完整的产业链地图；将暴雨、政策发布、项目开工等外部事件也纳入关联。</p>
+
+<div class="box green">
+  <strong>举例：</strong>旅游收入 → 酒店入住 → 社会消费 → 税收收入<br>
+  房地产投资 →（领先3个月）→ 钢铁产量 → 工业用电 → 就业
+</div>
+
+<h3>3.3 安徽经济画像</h3>
+<p>给系统建立"安徽经济档案"，包含五个维度：</p>
+<p><strong>基础画像</strong>（GDP结构、人口、财政、16市对比）· <strong>产业画像</strong>（优势产业识别、产业链地图）· <strong>动力画像</strong>（投资/消费/出口分析）· <strong>风险画像</strong>（财政/产业/区域/人口/外部五类风险监测）· <strong>周期画像</strong>（经济周期定位）。</p>
+
+<h3>3.4 专业知识库</h3>
+<p>四层结构化知识体系：<strong>概念层</strong>（术语和统计口径）→ <strong>事实层</strong>（安徽经济历史事件）→ <strong>机制层</strong>（传导规律的量化参数，如"居民收入每增长1%，拉动消费约0.7%"）→ <strong>决策层</strong>（政策模板和评估案例）。</p>
+
+<h2>四、系统如何工作</h2>
+<p>系统不是按预设流程运行，而是根据具体问题自主决定分析路径。以"分析旅游收入为什么下降12%"为例：</p>
+
+<div class="flow">
+  <div style="background:#3b82f6;">第一步<br>扫描确认异常</div>
+  <div style="background:#2563eb;">第二步<br>分析变化趋势</div>
+  <div style="background:#1d4ed8;">第三步<br>找出相关指标</div>
+  <div style="background:#1e40af;">第四步<br>锁定关键原因</div>
+  <div style="background:#1e3a8a;">第五步<br>量化贡献比例</div>
+  <div style="background:#172554;">第六步<br>查找类似案例</div>
+  <div style="background:#0f172a;">第七步<br>形成结论建议</div>
+</div>
+
+<p>经过七步，输出完整分析："旅游收入下降12%，主要原因是连续暴雨（约35%），其次是高铁客流下降（约25%）和酒店价格上涨（约15%）。天气属短期因素，类似事件恢复约2个月。建议加大暑期营销，预计可挽回3-5个百分点。"</p>
+
+<div class="box red">
+  <strong>核心价值：</strong>整个过程每步可追溯——领导可以追问"这个结论怎么来的""这个比例怎么算的"。
+</div>
+
+<h2>五、典型应用场景</h2>
+<table>
+<tr><th>场景</th><th>使用方式</th><th>提升</th></tr>
+<tr><td>月度形势分析</td><td>点击生成→几分钟输出完整报告</td><td>3-5天 → 2小时内</td></tr>
+<tr><td>处室专题分析</td><td>输入问题→自动分析→量化结论</td><td>凭经验 → 数据驱动</td></tr>
+<tr><td>政策前期评估</td><td>输入设想→推演效果→提示风险</td><td>定性讨论 → 定量比较</td></tr>
+<tr><td>突发事件响应</td><td>自动识别→滚动评估冲击</td><td>被动等待 → 主动预警</td></tr>
+</table>
+
+<h2>六、方案总结</h2>
+<div class="box blue">
+  <strong>核心思路：</strong>不是做一个固定流程的分析软件，而是建设一套完整的经济分析能力体系——让系统面对不同问题，能够自主选择方法、自主组合工具、自主给出有据可依的结论。
+</div>
+
+<table>
+<tr><th>建设内容</th><th>核心产出</th><th>主要价值</th></tr>
+<tr><td>经济分析工具包</td><td>29项标准化分析能力</td><td>系统有了"武器"，能分析、预测、推演</td></tr>
+<tr><td>经济知识图谱</td><td>2000+指标关系网络</td><td>系统理解指标关联，不再看作孤岛</td></tr>
+<tr><td>安徽经济画像</td><td>五维结构化描述+七个模型</td><td>系统对经济有整体认知</td></tr>
+<tr><td>专业知识库</td><td>约17500条结构化知识</td><td>结论有经济学依据，可追溯验证</td></tr>
+</table>
+
+<p style="text-align:center;margin-top:24px;color:var(--text3);">一次建设，多次复用 · 不为每个问题建流程，为建设能力让系统解决所有问题</p>
+
+</div>
+</body>
+</html>
